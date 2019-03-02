@@ -44,7 +44,7 @@
       if (!document.location.href.includes('access_token')) {
 	  let client_id = '107256413984-himbdkj6rbv03pcj7sib3bjb8jvv45u0.apps.googleusercontent.com';
 	  document.location.href= [`https://accounts.google.com/o/oauth2/v2/auth?client_id=${client_id}`,
-				   `redirect_uri=http://localhost:5000`,
+				   `redirect_uri=${window.location.href}`,
 				   `response_type=id_token token`,
 				   `scope=openid https://www.googleapis.com/auth/cloud-vision`,
 				   `nonce=${Math.random().toString()}`].join('&') ;
@@ -58,7 +58,7 @@
       console.log(token);
       
       // hide the token from the URL
-      history.pushState({},'',location.origin);
+      history.pushState({},'', window.location.href.substr(0, window.location.href.search("#")));
 
       // Access camera 
       var video = document.querySelector("#videoElement");      
