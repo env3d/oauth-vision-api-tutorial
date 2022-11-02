@@ -66,6 +66,7 @@
           var dataUrl = canvas.toDataURL();
 
 	  // Send image to google to analyze
+	  // Documentation of the annotate feature: https://cloud.google.com/vision/docs/reference/rest/v1/images/annotate 
 	  fetch('https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBc7VMHDMfnsOcIZmD-YAsB9xOe5tefURI', {
 	      method: 'POST',
 	      headers: {
