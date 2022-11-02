@@ -40,26 +40,6 @@
     
     <script>
 
-      // Need to first get an access token
-      if (!document.location.href.includes('access_token')) {
-	  let client_id = '107256413984-himbdkj6rbv03pcj7sib3bjb8jvv45u0.apps.googleusercontent.com';
-	  document.location.href= [`https://accounts.google.com/o/oauth2/v2/auth?client_id=${client_id}`,
-				   `redirect_uri=${window.location.href}`,
-				   `response_type=id_token token`,
-				   `scope=openid https://www.googleapis.com/auth/cloud-vision`,
-				   `nonce=${Math.random().toString()}`].join('&') ;
-	  
-      } 
-
-      // If we are here, we have the access token, prase it out and store in variable 
-      var matches = document.location.href.match(/(.*)\#access_token\=(.*?)\&/);
-      var app_url = matches[1];
-      var token = matches[2];
-      console.log(token);
-      
-      // hide the token from the URL
-      history.pushState({},'', window.location.href.substr(0, window.location.href.search("#")));
-
       // Access camera 
       var video = document.querySelector("#videoElement");      
       if (navigator.mediaDevices.getUserMedia) {       
@@ -86,7 +66,7 @@
           var dataUrl = canvas.toDataURL();
 
 	  // Send image to google to analyze
-	  fetch('https://vision.googleapis.com/v1/images:annotate', {
+	  fetch('https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBc7VMHDMfnsOcIZmD-YAsB9xOe5tefURI', {
 	      method: 'POST',
 	      headers: {
 		  'Authorization': `Bearer ${token}`,
